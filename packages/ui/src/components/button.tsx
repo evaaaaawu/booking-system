@@ -4,7 +4,7 @@ import classNames from "classnames";
 type ButtonVariant = "primary" | "secondary" | "white";
 type ButtonSize = "xs" | "sm" | "default" | "lg" | "xl" | "wide";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isSubmit?: boolean;
