@@ -43,5 +43,11 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "turbo/no-undeclared-env-vars": [
+      "error",
+      {
+        allow: ["GOOGLE_API_CREDENTIALS"],
+      },
+    ],
   },
 };
