@@ -7,7 +7,7 @@ async function main() {
       name: 'Eva Wu',
       email: 'yiju.wu1@gmail.com',
       bio: 'Web Developer based in Taiwan',
-      avatar: '/public/avatar/evaaaaawu.png',
+      avatar: '/avatar/evaaaaawu.png',
     },
   });
 
@@ -17,7 +17,7 @@ async function main() {
       name: 'May Lee',
       email: 'may@example.com',
       bio: 'Product Manager based in London',
-      avatar: '/public/avatar/default-avatar.svg',
+      avatar: '/avatar/default-avatar.svg',
     },
   });
 
