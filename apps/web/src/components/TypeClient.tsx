@@ -103,10 +103,8 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
   // 顯示可用時間
   const availableTimes = times.map((time) => (
     <div key={time}>
-      <Link href={`/${user.username}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}Z&type=${eventType.id}`}>
-        <a className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
-          {dayjs(time).format("hh:mma")}
-        </a>
+      <Link href={`/${user.username}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}Z&type=${eventType.id}`} className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
+        {dayjs(time).format("hh:mma")}
       </Link>
     </div>
   ));
@@ -116,8 +114,10 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
       <div className="sm:border-r sm:w-1/3">
         <Image 
           src={user.avatar ?? "/default-avatar.png"} 
-          alt="Avatar" 
-          className="w-16 h-16 rounded-full mb-4" 
+          alt="Avatar"
+          width={96}
+          height={96}
+          className="rounded-full mb-4"
         />
         <h2 className="font-medium text-gray-500">{user.name}</h2>
         <h1 className="text-3xl font-semibold text-gray-800 mb-4">{eventType.title}</h1>
