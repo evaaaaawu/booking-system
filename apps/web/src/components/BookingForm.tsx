@@ -113,8 +113,8 @@ export default function BookingForm({ user, eventType }: BookingFormProps) {
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? 'Confirming...' : 'Confirm'}
         </button>
-        <Link href={`/${user.username}/${eventType.id}`}>
-          <a className="ml-2 btn btn-white">Cancel</a>
+        <Link href={`/${user.username}/${eventType.id}`} className="ml-2 btn btn-white">
+          Cancel
         </Link>
       </div>
     </form>

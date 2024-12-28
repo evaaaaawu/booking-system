@@ -113,7 +113,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
     <>
       <div className="sm:border-r sm:w-1/3">
         <Image 
-          src={user.avatar ?? "/default-avatar.png"} 
+          src={user.avatar ?? "/avatar/default-avatar.svg"} 
           alt="Avatar"
           width={96}
           height={96}
