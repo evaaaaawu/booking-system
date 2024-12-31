@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import type { User as PrismaUser, EventType as PrismaEventType } from '@prisma/client';
+import { Button } from '@repo/ui/button';
+import { Spinner } from '@repo/ui/spinner';
 
 interface BookingFormProps {
   user: Partial<PrismaUser>;
@@ -110,9 +112,14 @@ export default function BookingForm({ user, eventType }: BookingFormProps) {
         ></textarea>
       </div>
       <div>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Confirming...' : 'Confirm'}
-        </button>
+        <Button
+          variant="primary"
+          size="lg"
+          isSubmit={true}
+          disabled={loading}
+        >
+          {loading ? <Spinner /> : 'Confirm'}
+        </Button>
         <Link href={`/${user.username}/${eventType.id}`} className="ml-2 btn btn-white">
           Cancel
         </Link>

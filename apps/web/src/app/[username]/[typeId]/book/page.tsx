@@ -30,7 +30,7 @@ export default async function BookPage({ params }: PageProps) {
             <div className="sm:flex px-4 py-5 sm:p-6">
               <div className="sm:w-1/2 sm:border-r">
                 <Image
-                  src={user.avatar ?? "/default-avatar.png"}
+                  src={user.avatar ?? "/avatar/default-avatar.svg"}
                   alt="Avatar"
                   width={64}
                   height={64}

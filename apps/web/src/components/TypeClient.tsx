@@ -7,13 +7,15 @@ import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isBetween from 'dayjs/plugin/isBetween';
 import type { User as PrismaUser, EventType as PrismaEventType } from '@prisma/client';
+import { Button } from '@repo/ui/button';
+import { Spinner } from '@repo/ui/spinner';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isBetween);
 
 interface TypeClientProps {
-  user: Partial<PrismaUser>;
-  eventType: Partial<PrismaEventType>;
+  user: PrismaUser;
+  eventType: PrismaEventType;
 }
 
 export default function TypeClient({ user, eventType }: TypeClientProps): JSX.Element {
@@ -36,21 +38,21 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
   const calendar = days.map((day) => (
-    <button
+    <Button
       key={day}
       onClick={() => setSelectedDate(dayjs().month(selectedMonth).date(day).format("YYYY-MM-DD"))}
       disabled={
         selectedMonth < dayjs().month() &&
         dayjs().month(selectedMonth).date(day).isBefore(dayjs(), 'day')
       }
-      className={
-        "text-center w-10 h-10 rounded-full mx-auto " +
-        (dayjs().isSameOrBefore(dayjs().month(selectedMonth).date(day)) ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-400 font-light') +
-        (dayjs(selectedDate).month(selectedMonth).date(day).isSame(dayjs(selectedDate).date(day), 'day') ? ' bg-blue-600 text-white-important' : '')
+      variant={
+        dayjs().isSameOrBefore(dayjs().month(selectedMonth).date(day)) ? 'secondary' : 'white'
       }
+      size="sm"
+      className={`${dayjs(selectedDate).month(selectedMonth).date(day).isSame(dayjs(selectedDate).date(day), 'day') ? 'bg-blue-600 text-white-important' : ''}`}
     >
       {day}
-    </button>
+    </Button>
   ));
 
   // 處理日期變更
@@ -103,7 +105,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
   // 顯示可用時間
   const availableTimes = times.map((time) => (
     <div key={time}>
-      <Link href={`/${user.username}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}Z&type=${eventType.id}`} className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
+      <Link href={`/${user.username}/${eventType.id}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}`} className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
         {dayjs(time).format("hh:mma")}
       </Link>
     </div>
@@ -133,16 +135,45 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
         <div className="flex text-gray-600 font-light text-xl mb-4 ml-2">
           <span className="w-1/2">{dayjs().month(selectedMonth).format("MMMM YYYY")}</span>
           <div className="w-1/2 text-right">
-            <button onClick={decrementMonth} className={`mr-4 ${selectedMonth < dayjs().month() ? 'text-gray-400' : ''}`} disabled={selectedMonth < dayjs().month()}>
-              <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+            <Button 
+              onClick={decrementMonth} 
+              variant={selectedMonth < dayjs().month() ? 'white' : 'secondary'}
+              size="xs"
+              className={`mr-4 p-2 border ${selectedMonth < dayjs().month() ? 'border-red-500 text-gray-400 cursor-not-allowed' : 'border-green-500 text-blue-600 hover:text-blue-800'}`}
+              disabled={selectedMonth < dayjs().month()}
+            >
+              <svg 
+                className="w-5 h-5" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 20 20" 
+                fill="currentColor"
+              >
+                <path 
+                  fillRule="evenodd" 
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" 
+                  clipRule="evenodd" 
+                />
               </svg>
-            </button>
-            <button onClick={incrementMonth}>
-              <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </Button>
+            <Button 
+              onClick={incrementMonth} 
+              variant="secondary"
+              size="xs"
+              className="p-2 border border-green-500 text-blue-600 hover:text-blue-800"
+            >
+              <svg 
+                className="w-5 h-5" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 20 20" 
+                fill="currentColor"
+              >
+                <path 
+                  fillRule="evenodd" 
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" 
+                  clipRule="evenodd" 
+                />
               </svg>
-            </button>
+            </Button>
           </div>
         </div>
         <div className="grid grid-cols-7 gap-y-4 text-center">
@@ -153,7 +184,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
         <div className="text-gray-600 font-light text-xl mb-4 text-left">
           <span>{dayjs(selectedDate).format("dddd DD MMMM YYYY")}</span>
         </div>
-        {!loading ? availableTimes : <div className="loader"></div>}
+        {!loading ? availableTimes : <Spinner />}
       </div>
     </>
   );

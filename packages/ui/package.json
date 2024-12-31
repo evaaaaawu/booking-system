@@ -9,7 +9,8 @@
   ],
   "exports": {
     "./styles.css": "./dist/index.css",
-    "./card": "./src/card.tsx"
+    "./button": "./src/components/button.tsx",
+    "./spinner": "./src/components/spinner.tsx"
   },
   "license": "MIT",
   "scripts": {

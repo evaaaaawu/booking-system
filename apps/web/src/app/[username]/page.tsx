@@ -17,12 +17,12 @@ export default async function UserPage({ params }: UserPageProps): Promise<JSX.E
     const eventTypes = user.eventTypes.map((type) =>
       <Link href={`/${user.username}/${type.id}`} key={type.id}>
         <li className="px-6 py-4">
-          <div className="inline-block w-3 h-3 rounded-full bg-blue-600 mr-2">
+          <div className="inline-block w-16 h-16 rounded-full bg-blue-600 mr-2"> 
             <h2 className="inline-block font-medium">{type.title}</h2>
             <p className="inline-block text-gray-400 ml-2">{type.description}</p>
           </div>
         </li>
-      </Link>  
+      </Link>
     );
 
     return (
