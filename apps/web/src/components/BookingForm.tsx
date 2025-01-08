@@ -13,7 +13,7 @@ interface BookingFormProps {
   eventType: Partial<PrismaEventType>;
 }
 
-export default function BookingForm({ user, eventType }: BookingFormProps) {
+export default function BookingForm({ user, eventType }: BookingFormProps): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
   const date = searchParams?.get('date') || '';
