@@ -7,15 +7,15 @@ import { getUserWithEventType } from '../../../../lib/dataFetcher';
 
 interface PageProps {
   params: {
-    username: string;
+    name: string;
     typeId: string;
   };
 }
 
 export default async function BookPage({ params }: PageProps) {
   try {
-    const { user, eventType } = await getUserWithEventType(params.username, params.typeId);
-
+    const { user, eventType } = await getUserWithEventType(params.name, params.typeId);
+    console.log(user);
     return (
       <div>
         <Head>
@@ -30,7 +30,7 @@ export default async function BookPage({ params }: PageProps) {
             <div className="sm:flex px-4 py-5 sm:p-6">
               <div className="sm:w-1/2 sm:border-r">
                 <Image
-                  src={user.avatar ?? "/avatar/default-avatar.svg"}
+                  src={user.image ?? ""}
                   alt="Avatar"
                   width={64}
                   height={64}

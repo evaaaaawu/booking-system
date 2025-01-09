@@ -3,12 +3,12 @@ import prisma from '@repo/prisma/lib/prisma';
 import { google } from 'googleapis'
 import { Credentials } from 'google-auth-library';
 
-export async function POST(req: NextRequest, { params }: { params: { user: string } }) {
-  const { user } = params
+export async function POST(req: NextRequest, { params }: { params: { name: string } }) {
+  const { name } = params
 
   const currentUser = await prisma.user.findFirst({
     where: {
-      username: user,
+      name,
     },
     select: {
       credentials: true

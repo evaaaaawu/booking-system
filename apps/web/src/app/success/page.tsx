@@ -4,13 +4,13 @@ import dayjs from 'dayjs'
 import { getUserWithEventType } from '../../lib/dataFetcher';
 
 export default async function SuccessPage({ searchParams }: { searchParams: Record<string, string> }) {
-  const { username = '', typeId = '', date = '' } = searchParams
+  const { name = '', typeId = '', date = '' } = searchParams
 
-  if (!username || !typeId || !date) {
+  if (!name || !typeId || !date) {
     return <div>Error: Missing required parameters.</div>
   }
 
-  const { user, eventType } = await getUserWithEventType(username, typeId);
+  const { user, eventType } = await getUserWithEventType(name, typeId);
 
   return (
     <div>

@@ -3,8 +3,8 @@ import prisma from '@repo/prisma/lib/prisma';
 import { google } from 'googleapis';
 import { Credentials } from 'google-auth-library';
 
-export async function GET(request: NextRequest, { params }: { params: { user: string } }): Promise<NextResponse> {
-  const { user } = params;
+export async function GET(request: NextRequest, { params }: { params: { name: string } }): Promise<NextResponse> {
+  const { name } = params;
   const url = new URL(request.url);
   const date = url.searchParams.get('date');
 
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { user: st
 
   const currentUser = await prisma.user.findFirst({
     where: {
-      username: user,
+      name,
     },
     select: {
       credentials: true

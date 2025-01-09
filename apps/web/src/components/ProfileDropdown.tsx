@@ -7,12 +7,10 @@ interface ProfileDropdownProps {
     name: string;
     email: string;
     image: string;
-  } | null;
+  }
 }
 
 export default function ProfileDropdown({ user }: ProfileDropdownProps): JSX.Element {
-  console.log("ProfileDropdown user:", user);
-
   const [profileDropdownExpanded, setProfileDropdownExpanded] = useState(false);
 
   const toggleProfileDropdown = () => {
@@ -39,7 +37,7 @@ export default function ProfileDropdown({ user }: ProfileDropdownProps): JSX.Ele
           <span className="sr-only">Open user menu</span>
           <img
             className="h-8 w-8 rounded-full"
-            src={user?.image || ''}
+            src={user.image ?? ""}
             alt=""
           />
         </button>

@@ -23,8 +23,7 @@ export const authOptions: NextAuthOptions = {
     // signIn: '/auth/signin', // 可選：自定義登錄頁面
     signOut: '/auth/signout', // 可選：自定義登出頁面
     // error: '/auth/error', // 可選：自定義錯誤頁面
-  },
-  // 其他 NextAuth 配置選項
+  }
 };
 
 // 封裝 getServerSession 以便在應用中使用

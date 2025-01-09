@@ -34,7 +34,7 @@ export default function BookingForm({ user, eventType }: BookingFormProps): JSX.
     };
 
     try {
-      const res = await fetch(`/api/book/${user.username}`, {
+      const res = await fetch(`/api/book/${user.name}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function BookingForm({ user, eventType }: BookingFormProps): JSX.
         router.push(
           `/success?date=${encodeURIComponent(
             date
-          )}&type=${eventType.id}&user=${encodeURIComponent(user.username!)}`
+          )}&type=${eventType.id}&user=${encodeURIComponent(user.name!)}`
         );
       } else {
         console.error('Booking failed');
@@ -120,7 +120,7 @@ export default function BookingForm({ user, eventType }: BookingFormProps): JSX.
         >
           {loading ? <Spinner /> : 'Confirm'}
         </Button>
-        <Link href={`/${user.username}/${eventType.id}`} className="ml-2 btn btn-white">
+        <Link href={`/${user.name}/${eventType.id}`} className="ml-2 btn btn-white">
           Cancel
         </Link>
       </div>
