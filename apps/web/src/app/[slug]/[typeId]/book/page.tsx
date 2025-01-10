@@ -15,7 +15,6 @@ interface PageProps {
 export default async function BookPage({ params }: PageProps) {
   try {
     const { user, eventType } = await getUserWithEventType(params.slug, params.typeId);
-    console.log(user);
     return (
       <div>
         <Head>
