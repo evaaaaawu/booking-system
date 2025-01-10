@@ -9,14 +9,14 @@ export interface UserWithEventTypeProps extends UserProps {
   eventType: PrismaEventType;
 }
 
-export async function getUser(username: string): Promise<UserProps> {
-  const user = await prisma.user.findFirst({
-    where: { username },
+export async function getUser(slug: string): Promise<UserProps> {
+  const user = await prisma.user.findUnique({
+    where: { slug },
     select: {
-      username: true,
       name: true,
+      slug: true,
       bio: true,
-      avatar: true,
+      image: true,
       eventTypes: {
         select: {
           id: true,
@@ -35,8 +35,8 @@ export async function getUser(username: string): Promise<UserProps> {
   return { user: user as PrismaUser & { eventTypes: PrismaEventType[] } };
 }
 
-export async function getUserWithEventType(username: string, typeId: string): Promise<UserWithEventTypeProps> {
-  const userData = await getUser(username);
+export async function getUserWithEventType(slug: string, typeId: string): Promise<UserWithEventTypeProps> {
+  const userData = await getUser(slug);
 
   const eventType = userData.user.eventTypes.find(et => et.id === parseInt(typeId));
 

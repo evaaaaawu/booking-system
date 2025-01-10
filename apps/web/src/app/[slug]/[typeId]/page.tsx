@@ -5,14 +5,14 @@ import TypeClient from '../../../components/TypeClient';
 
 interface PageProps {
   params: {
-    name: string;
+    slug: string;
     typeId: string;
   };
 }
 
 export default async function TypePage({ params }: PageProps): Promise<JSX.Element> {
   try {
-    const { user, eventType } = await getUserWithEventType(params.name, params.typeId);
+    const { user, eventType } = await getUserWithEventType(params.slug, params.typeId);
 
     return (
       <div>

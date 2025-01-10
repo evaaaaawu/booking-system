@@ -7,14 +7,14 @@ import { getUserWithEventType } from '../../../../lib/dataFetcher';
 
 interface PageProps {
   params: {
-    name: string;
+    slug: string;
     typeId: string;
   };
 }
 
 export default async function BookPage({ params }: PageProps) {
   try {
-    const { user, eventType } = await getUserWithEventType(params.name, params.typeId);
+    const { user, eventType } = await getUserWithEventType(params.slug, params.typeId);
     console.log(user);
     return (
       <div>

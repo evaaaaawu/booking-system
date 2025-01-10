@@ -6,16 +6,16 @@ import { getUser } from '../../lib/dataFetcher';
 
 interface UserPageProps {
   params: {
-    name: string;
+    slug: string;
   };
 }
 
 export default async function UserPage({ params }: UserPageProps): Promise<JSX.Element> {
   try {
-    const { user } = await getUser(params.name);
+    const { user } = await getUser(params.slug);
 
     const eventTypes = user.eventTypes.map((type) =>
-      <Link href={`/${user.name}/${type.id}`} key={type.id}>
+      <Link href={`/${user.slug}/${type.id}`} key={type.id}>
         <li className="px-6 py-4">
           <div className="inline-block w-16 h-16 rounded-full bg-blue-600 mr-2"> 
             <h2 className="inline-block font-medium">{type.title}</h2>
