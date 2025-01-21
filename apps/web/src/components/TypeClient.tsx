@@ -62,7 +62,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
     const fetchAvailability = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/availability/${user.username}?date=${dayjs(selectedDate).format("YYYY-MM-DD")}`);
+        const res = await fetch(`/api/availability/${user.name}?date=${dayjs(selectedDate).format("YYYY-MM-DD")}`);
         const data = await res.json();
         setBusy(data.primary.busy);
       } catch (error) {
@@ -73,7 +73,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
     };
 
     fetchAvailability();
-  }, [selectedDate, user.username]);
+  }, [selectedDate, user.name]);
 
   // 設置時段
   let times: string[] = [];
@@ -105,7 +105,7 @@ export default function TypeClient({ user, eventType }: TypeClientProps): JSX.El
   // 顯示可用時間
   const availableTimes = times.map((time) => (
     <div key={time}>
-      <Link href={`/${user.username}/${eventType.id}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}`} className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
+      <Link href={`/${user.slug}/${eventType.id}/book?date=${selectedDate}T${dayjs(time).format("HH:mm:ss")}`} className="block font-medium mb-4 text-blue-600 border border-blue-600 rounded hover:text-white hover:bg-blue-600 py-4">
         {dayjs(time).format("hh:mma")}
       </Link>
     </div>

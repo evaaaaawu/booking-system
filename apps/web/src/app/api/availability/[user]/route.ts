@@ -3,9 +3,9 @@ import prisma from '@repo/prisma/lib/prisma';
 import { google } from 'googleapis';
 import { Credentials } from 'google-auth-library';
 
-export async function GET(request: NextRequest, { params }: { params: { name: string } }): Promise<NextResponse> {
+export async function GET(req: NextRequest, { params }: { params: { name: string } }): Promise<NextResponse> {
   const { name } = params;
-  const url = new URL(request.url);
+  const url = new URL(req.url);
   const date = url.searchParams.get('date');
 
   if (!date) {
